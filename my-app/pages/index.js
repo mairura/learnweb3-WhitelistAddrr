@@ -56,6 +56,7 @@ export default function Home() {
     try {
       // We need a Signer here since this is a 'write' transaction.
       const signer = await getProviderOrSigner(true);
+      console.log(signer)
       // Create a new instance of the Contract with a Signer, which allows
       // update methods
       const whitelistContract = new Contract(
@@ -73,7 +74,7 @@ export default function Home() {
       await getNumberOfWhitelisted();
       setJoinedWhitelist(true);
     } catch (err) {
-      console.error(err);
+      console.error(err.message);
     }
   };
 
@@ -93,8 +94,7 @@ export default function Home() {
         provider
       );
       // call the numAddressesWhitelisted from the contract
-      const _numberOfWhitelisted =
-        await whitelistContract.numAddressesWhitelisted();
+      const _numberOfWhitelisted = await whitelistContract.numAddressesWhitelisted();
       setNumberOfWhitelisted(_numberOfWhitelisted);
     } catch (err) {
       console.error(err);
